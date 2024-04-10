@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .container{
+            /* border: solid red; */
+            height: 691px;
+            background-color: rgb(24, 21, 69);
+            box-shadow: 2px 2px 10px white inset, 2px 2px 10px white inset;
+        }
+        .box{
+            /* border: solid yellow; */
+            height: 500px;
+            width: 500px;
+            margin-left: 499px;
+            margin-top: 100px;
+            display: inline-block;
+            background-color: rgb(234, 7, 158);
+            border-radius: 20px;
+
+        }
+        h1{
+            text-align:center;
+        }
+        #inp{
+            width: 87%;
+            height: 40px;
+            border-radius: 20px;
+            margin-left: 24px;
+            padding-left: 15px;
+            margin-top: 10px;
+        }
+        .box li{
+            border: black solid;
+            display: flex;
+            margin: 5px;
+            font-size: 20px;
+            height: 28px;
+            padding-top: 12px;
+            padding-bottom: 10px;
+            font-weight: bolder;
+            border-radius: 10px;
+            background-color: rgb(24, 21, 69);
+            padding-left: 10px;
+            width: 85%;
+            margin-left: 16px;
+            margin-top: 12px;
+            color: white;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        
+        .box li i{
+            position: absolute;
+            background: white;
+            border: solid black;
+            height: 45px;
+            width: 50px;
+            margin-top: -13px;
+            margin-left: 400px;
+            border-radius: 10px;
+        }
+        
+        .box li i::before{
+            position: absolute;
+            content: " ";
+            width: 24px;
+            height: 4px;
+            background: red;
+            margin-left: 12px;
+            margin-top: 20px;
+            transform: rotate(45deg);
+        }
+        .box li i::after{
+            position: absolute;
+            content: " ";
+            width: 25px;
+            height: 4px;
+            background: red;
+            margin-left: 12px;
+            margin-top: 20px;
+            transform: rotate(-45deg);
+        }
+        .box li.done{
+            background: grey;
+        }
+        #list{
+            position: relative;
+            /* margin-top: 20px; */
+            height: 382px;
+            padding-right: 10px;
+            overflow-y: auto;
+        }
+        ::-webkit-scrollbar-track{
+            box-shadow: 0px 0px 10px black inset;
+        }
+        ::-webkit-scrollbar{
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb{
+            background:  rgb(244, 244, 246);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>To Do List</h1>
+            <input type="text" placeholder="Write here" id="inp">
+            <ul id="list"></ul>
+        </div>
+    </div>
+    <script>
+        let inp = document.querySelector('#inp');
+        let list = document.querySelector('#list');
+
+        inp.addEventListener("keyup" , function(event){
+            if(event.key == "Enter") {
+                addItem(this.value)
+                this.value = ""
+            }
+        })
+
+        let addItem = (inp)=> {
+            let listItem = document.createElement("li");
+            listItem.innerHTML = `${inp}<i></i>`;
+
+            listItem.addEventListener("click", function(){
+                this.classList.toggle('done');
+            })
+
+            listItem.querySelector("i").addEventListener("click", function(){
+                listItem.remove();
+            })
+
+            list.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>
